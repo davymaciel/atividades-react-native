@@ -11,7 +11,7 @@ class App extends Component {
           {/* Card 1 */}
           <View style={styles.card}>
             <Image 
-              source={{ uri: 'https://cdn-images.dzcdn.net/images/cover/82db4c0f8e9412cafb1cd765b076d58c/500x500.jpg' }}
+              source={{ uri: 'https://cdn-images.dzcdn.net/images/cover/82db4c0f8e9412cafb1cd765b076d58c/500x500.jpg'  }}
               style={styles.image}
             />
             <Text style={styles.albumTitle}>GNX</Text>
@@ -98,3 +98,24 @@ export default App;
 // Essas linhas, como styles.safeArea, styles.container, styles.card, etc., são referências aos estilos definidos no objeto styles criado com StyleSheet.create().
 // No React Native, a estilização não é feita com classes CSS (className="container" no React Web), mas sim passando um objeto de estilo dentro do atributo style.
 // O StyleSheet.create() ajuda a organizar e otimizar esses estilos.
+
+
+
+// ESTRUTURA A SER USADA FUTURAMENTE PARA IMAGENS
+{/* <Jobs
+  largura={200} altura={300}    //DECLARA LARGURA E ALTURA
+/> */}
+
+// class Jobs extends Component {
+//   render(){
+    // let img1 = 'https://cdn-images.dzcdn.net/images/cover/82db4c0f8e9412cafb1cd765b076d58c/500x500.jpg'   //DECLARA VARIÁVEL COM LINK DA IMAGEM
+//   }
+//   return(
+//     <View>
+//     <Image>
+//     source={{ uri: img1 }}     //CHAMA VARIÁVEL
+//     style={{ widht: this.props.largura, height: this.props.altura }}
+//     />
+//     </View>
+//   )
+// }
