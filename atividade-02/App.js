@@ -2,9 +2,9 @@ import React from "react";
 import { View, Text, SafeAreaView, ScrollView, StyleSheet, Image, FlatList } from "react-native";
 
 // Dados dos produtores do álbum GNX
-const DATA = [
+const DATA = [    // declarando uma constante chamada DATA, que armazena um array de objetos contendo informações sobre os produtores do álbum. (Esse array é usado como fonte de dados para a lista de produtores)
   {
-    id: "1",
+    id: "1",    // Identificador único do produtor
     title2: "Jack Antonoff",
     image2: "https://hips.hearstapps.com/hmg-prod/images/jack-antonoff-attends-the-65th-grammy-awards-on-february-05-news-photo-1708541671.jpg?crop=0.481xw:0.721xh;0.260xw,0&resize=1200:*",
     text2: ["Track: 1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12"]
@@ -35,11 +35,12 @@ const DATA = [
   }
 ];
 
+// Componente para exibir cada produtor
 const Item = ({ title2, image2, text2 }) => (
-  <View style={styles.item}>
-    <Image source={{ uri: image2 }} style={styles.image2} />
-    <View style={styles.infoContainer}>
-      <Text style={styles.title2}>{title2}</Text>
+  <View style={styles.item}>    {/* Container do item */}
+    <Image source={{ uri: image2 }} style={styles.image2} />    {/* Exibe a imagem do produtor */}
+    <View style={styles.infoContainer}>   {/* Container do texto */}
+      <Text style={styles.title2}>{title2}</Text>   {/* Exibe o nome do produtor */}
       {text2.map((line, index) => (
         <Text key={index} style={styles.text2}>{line}</Text>
       ))}
@@ -69,10 +70,10 @@ const App = () => {
         <Text style={styles.producersTitle}>Produção</Text>
 
         <FlatList
-          data={DATA}
-          renderItem={({ item }) => <Item title2={item.title2} image2={item.image2} text2={item.text2} />}
-          keyExtractor={(item) => item.id}
-          contentContainerStyle={styles.flatListContainer}
+          data={DATA}   // Define os dados que serão exibidos na lista. No seu caso, DATA é um array contendo informações dos produtores musicais.
+          renderItem={({ item }) => <Item title2={item.title2} image2={item.image2} text2={item.text2} />}    // Define como cada item da lista será renderizado.
+          keyExtractor={(item) => item.id}    // Define uma chave única (key) para cada item da lista.
+          contentContainerStyle={styles.flatListContainer}   // A propriedade contentContainerStyle no FlatList é usada para aplicar estilos ao conteúdo interno da lista, ou seja, afeta a área que contém os itens, mas não o próprio FlatList.
         />
       </ScrollView>
     </SafeAreaView>
@@ -139,18 +140,18 @@ const styles = StyleSheet.create({
     fontWeight: '400',
   },
   item: {
-    flexDirection: 'row',
+    flexDirection: 'row', // Organiza os elementos dentro do item em linha (horizontalmente)
     backgroundColor: '#1E1E1E',
-    padding: 10,
-    marginBottom: 10,
+    padding: 10, // Adiciona um espaçamento interno de 10 pixels ao redor do conteúdo
+    marginBottom: 10, // Adiciona um espaçamento de 10 pixels abaixo de cada item
     borderRadius: 10,
-    alignItems: 'center',
+    alignItems: 'center', // Alinha verticalmente ao centro
     width: 300,
-    elevation: 5,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
+    elevation: 5, // Adiciona um efeito de sombra no Android para dar profundidade
+    shadowColor: '#000', // Define a cor da sombra como preta (iOS e Android)
+    shadowOffset: { width: 0, height: 2 }, // Define o deslocamento da sombra (2px para baixo)
+    shadowOpacity: 0.2, // Define a opacidade da sombra em 20%
+    shadowRadius: 4, // Define o raio de difusão da sombra para suavizá-la
   },
   title2: {
     fontSize: 16,
@@ -168,11 +169,22 @@ const styles = StyleSheet.create({
     color: '#BBB',
   },
   infoContainer: {
-    flex: 1,
+    flex: 1,    //garante que os textos dentro dos itens da lista ocupem o espaço adequado.
   }, 
   flatListContainer: {
-    paddingBottom: 20,
+    paddingBottom: 20,    // Adiciona um espaço extra na parte inferior da lista, evitando que o último item fique colado no final da tela.
   },
 });
 
 export default App;
+
+// COMENTÁRIOS
+// O FlatList é um componente altamente eficiente para renderizar listas de dados no React Native. 
+// Ele é otimizado para lidar com grandes quantidades de itens, renderizando apenas os elementos visíveis na tela, o que melhora a performance do aplicativo.
+
+// O FlatList recebe um array (DATA) e itera sobre ele.
+// Para cada elemento do array, ele renderiza um componente Item, passando os dados necessários.
+// Ele só carrega na tela os itens visíveis, otimizando o uso de memória e melhorando o desempenho.
+
+// style → Aplica estilos ao FlatList inteiro (incluindo bordas, fundo, tamanho etc.).
+// contentContainerStyle → Aplica estilos somente ao conteúdo interno da lista.
