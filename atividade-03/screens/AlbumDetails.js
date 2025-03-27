@@ -34,30 +34,45 @@ const DATA = [
   }
 ];
 
+// Componente responsável por exibir os detalhes do álbum
 const AlbumDetails = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView contentContainerStyle={styles.container}>
 
+        {/* Card contendo a capa do álbum, o título e o nome do artista */}
         <View style={styles.card}>
-          <Image source={{ uri: "https://cdn-images.dzcdn.net/images/cover/82db4c0f8e9412cafb1cd765b076d58c/500x500.jpg" }} style={styles.image} />
+          <Image 
+            source={{ uri: "https://cdn-images.dzcdn.net/images/cover/82db4c0f8e9412cafb1cd765b076d58c/500x500.jpg" }} 
+            style={styles.image} 
+          />
           <Text style={styles.albumTitle}>GNX</Text>
           <Text style={styles.artist}>Kendrick Lamar</Text>
         </View>
 
+        {/* Card contendo uma breve descrição do álbum */}
         <View style={styles.card}>
-          <Text style={styles.info}>GNX é o sexto álbum de estúdio do rapper americano Kendrick Lamar. 
-            Lançado de surpresa pela PGLang e Interscope Records em 22 de novembro de 2024, 
+          <Text style={styles.info}>
+            GNX é o sexto álbum de estúdio do rapper americano Kendrick Lamar.
+            Lançado de surpresa pela PGLang e Interscope Records em 22 de novembro de 2024,
             o álbum conta com participações especiais de SZA, Dody6, Roddy Ricch, e entre outros.
           </Text>
         </View>
 
+        {/* Título da seção que lista os produtores */}
         <Text style={styles.producersTitle}>Produção</Text>
 
+        {/* FlatList para exibir a lista de produtores */}
         <FlatList
-          data={DATA}
+          data={DATA} // Define a lista de produtores
           renderItem={({ item }) => (
-            <TouchableOpacity onPress={() => item.id === "1" && navigation.navigate("ProducerDetails", { producer: item })}>
+            
+            <TouchableOpacity // TouchableOpacity permite a interação com os itens da lista
+              onPress={() => 
+                item.id === "1" && // Apenas Jack Antonoff pode ser clicado para navegar
+                navigation.navigate("ProducerDetails", { producer: item }) // Navega para a tela de detalhes do produtor
+              }
+            >
               <View style={styles.item}>
                 <Image source={{ uri: item.image }} style={styles.image2} />
                 <View style={styles.infoContainer}>
@@ -69,7 +84,7 @@ const AlbumDetails = ({ navigation }) => {
               </View>
             </TouchableOpacity>
           )}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => item.id} // Define a chave única para cada item
           contentContainerStyle={styles.flatListContainer}
         />
       </ScrollView>

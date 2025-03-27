@@ -1,8 +1,9 @@
 import React from "react";
 import { View, Text, Image, SafeAreaView, StyleSheet, FlatList, ScrollView } from "react-native";
 
+// O componente recebe a propriedade `route`, que contém os parâmetros passados pela navegação.
 const ProducerDetails = ({ route }) => {
-  const { producer } = route.params;
+  const { producer } = route.params; // Extraindo o objeto 'producer' passado via navegação
 
   const productions = [
     {
@@ -31,6 +32,7 @@ const ProducerDetails = ({ route }) => {
     },
   ];
 
+  // Componente para renderizar cada item da lista de produções
   const ProductionItem = ({ title, image, tracks }) => (
     <View style={styles.item}>
       <Image source={{ uri: image }} style={styles.itemImage} />
@@ -45,14 +47,21 @@ const ProducerDetails = ({ route }) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      {/* ScrollView para permitir rolagem da tela */}
       <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
+        
+        {/* Exibição da imagem do produtor */}
         <Image source={{ uri: producer.image }} style={styles.image} />
+
         <Text style={styles.title}>{producer.title}</Text>
+
+        {/* Lista de faixas produzidas */}
         <Text style={styles.subtitle}>Faixas produzidas:</Text>
         {producer.text.map((line, index) => (
           <Text key={index} style={styles.track}>{line}</Text>
         ))}
 
+        {/* Card com informações sobre o produtor */}
         <View style={styles.card}>
           <Text style={styles.info}>
             Jack Michael Antonoff é um músico, produtor, cantor e compositor estadunidense. Ele é mais conhecido por ser
@@ -60,15 +69,16 @@ const ProducerDetails = ({ route }) => {
             trabalhar com diversas artistas, entre elas estão Taylor Swift, Sia, Lana Del Rey e Lorde.
           </Text>
         </View>
-
+        
         <Text style={styles.producersTitle}>Produções</Text>
 
+        {/* FlatList para exibir os álbuns produzidos */}
         <FlatList
-          data={productions}
+          data={productions} // Lista de produções
           renderItem={({ item }) => <ProductionItem title={item.title} image={item.image} tracks={item.tracks} />}
           keyExtractor={(item) => item.id}
           contentContainerStyle={styles.flatListContainer}
-          nestedScrollEnabled={true}
+          nestedScrollEnabled={true} // Permite rolagem dentro do ScrollView
         />
       </ScrollView>
     </SafeAreaView>
